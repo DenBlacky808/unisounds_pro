@@ -8,5 +8,12 @@ class Track(models.Model):
     download_link = models.FileField(upload_to='tracks/')
     download_counter = models.PositiveIntegerField(default='0')
     play_counter = models.PositiveIntegerField(default='0')
-    genre = models.CharField(verbose_name='Genre', max_length=256, blank='True')
+    MAIN_GENRE = (
+        ('Epic', 'Epic'),
+        ('Upbeat', 'Upbeat'),
+        ('Abstract', 'Abstract'),
+        ('Sport', 'Sport'),
+        ('Corporate', 'Corporate'),
+    )
+    genre = models.CharField(verbose_name='Genre', max_length=256, choices=MAIN_GENRE)
     mood = models.CharField(verbose_name='Mood', max_length=256, blank=True)
