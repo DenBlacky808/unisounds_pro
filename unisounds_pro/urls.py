@@ -18,12 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path
+from django.views.generic import RedirectView
+
 import mainapp.views as mainapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mainapp.main, name='main'),
-    path('blog/', mainapp.blog, name='blog'),
+    path('', mainapp.blog, name='blog'),
+    # path('/playcnt/edit/')
 ]
 
 

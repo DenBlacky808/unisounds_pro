@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "/img/favicon.ico" %}">
+</head>
+<body>
+<a href="    {% url 'blog' %}" class="">
+    продукты
+</a>
+
+{% for track in tracks %}
+    <audio controls preload="auto">
+        <source src="{{ track.download_link.url }}" type="audio/mpeg">
+    </audio>
+    {#        {% url track.download_link.url %}#}
+    <p><a href="/media/{{ track.download_link }}" download>{{ track.name }}</a></p>
+{% endfor %}
+
+</body>
+</html>

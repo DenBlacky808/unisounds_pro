@@ -17,3 +17,4 @@ class Track(models.Model):
     )
     genre = models.CharField(verbose_name='Genre', max_length=256, choices=MAIN_GENRE)
     mood = models.CharField(verbose_name='Mood', max_length=256, blank=True)
+    short_desc = models.TextField(verbose_name='Short description', blank=True)
