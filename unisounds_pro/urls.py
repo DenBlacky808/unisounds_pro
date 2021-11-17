@@ -24,10 +24,10 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mainapp.blog, name='blog'),
-    # path('/playcnt/edit/')
+    path('', mainapp.main, name='main'),
+    path('category/<int:pk>/', mainapp.blog, name='category'),
 ]
 
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

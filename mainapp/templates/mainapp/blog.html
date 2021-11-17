@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
     <script src="{% static '/js/jquery-3.6.0.js' %}"></script>
     <script src="{% static '/js/plays.js' %}"></script>
-{#     <script type="text/javascript">$(document).ready(function(){alert(jQuery.fn.jquery);});#}
-{# </script>#}
+    {#     <script type="text/javascript">$(document).ready(function(){alert(jQuery.fn.jquery);});#}
+    {# </script>#}
 
     <style>
         .bd-placeholder-img {
@@ -26,9 +26,11 @@
             -moz-user-select: none;
             user-select: none;
         }
+
         .bg-blue {
-           background-color: #7F07E2;
+            background-color: #7F07E2;
         }
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -48,29 +50,23 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
     </header>
-
-
 </div>
 
 <main class="container">
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-blue">
 
-                <div class="col-md-6 px-0">
-                    <img src="{% static 'img/logo.png' %}" alt="">
-                    <p class="lead mb-0">Background music for you.</p>
-                </div>
+        <div class="col-md-6 px-0">
+            <img src="{% static 'img/logo.png' %}" alt="">
+            <p class="lead mb-0">Background music for you.</p>
+        </div>
     </div>
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 link-secondary" href="#">EPIC</a>
-            <a class="p-2 link-secondary" href="#">Happy</a>
-            <a class="p-2 link-secondary" href="#">Abstract</a>
-            <a class="p-2 link-secondary" href="#">Sport</a>
-            <a class="p-2 link-secondary" href="#">Corporate</a>
-            <a class="p-2 link-secondary" href="#">Technology</a>
-            <a class="p-2 link-secondary" href="#">Cute</a>
-            <a class="p-2 link-secondary" href="#">Cinematic</a>
-            <a class="p-2 link-secondary" href="#">Inspiring</a>
+            {% for link in links_menu %}
+                <a href="{% url 'category' link.pk %}">
+                {{ link.name }}
+                </a>
+            {% endfor %}
         </nav>
     </div>
     <div class="row mb-2">
@@ -80,10 +76,10 @@
                     <div class="col p-4 d-flex flex-column position-static">
                         <strong class="d-inline-block mb-2 text-primary">{{ track.genre }}</strong>
                         <h3 class="mb-3">{{ track.name }}</h3>
-{#                        <h3 class="mb-3">{{ track.pk }}</h3>#}
+                        {#                        <h3 class="mb-3">{{ track.pk }}</h3>#}
                         <div class="mb-1 text-muted">
-{#                            <audio class='player_audio' controls preload="auto" id="audioID{{ track.pk }}">#}
-                            <audio controls preload="auto" ">
+                            {#                            <audio class='player_audio' controls preload="auto" id="audioID{{ track.pk }}">#}
+                            <audio controls preload="auto">
                                 <source src="{{ track.download_link.url }}" type="audio/mpeg">
                             </audio>
                         </div>

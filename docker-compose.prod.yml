@@ -5,20 +5,32 @@ services:
     image: postgres:13.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+    env_file:
+      - .env.prod.db
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
     command: gunicorn unisounds_pro.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - ./:/usr/src/app/
-    ports:
-      - 8000:8000
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/media
+    expose:
+      - 8000
     env_file:
-      - .env.dev
+      - .env.prod
     depends_on:
       - db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/media
+    ports:
+      - 1337:80
+    depends_on:
+      - web
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
