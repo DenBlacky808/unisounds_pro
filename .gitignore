@@ -5,4 +5,5 @@
 /.env.prod.db
 /nginx/certs
 /nginx/nginx.conf
+/nginx/dev
 /unisounds_pro/settings.py
