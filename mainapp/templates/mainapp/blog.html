@@ -84,7 +84,8 @@
                             </audio>
                         </div>
                         <p class="card-text mb-auto">{{ track.short_desc }}</p>
-                        <a href="/media/{{ track.download_link }}" download>
+                        <a href="{% url 'download' track.pk %}">
+<!--                        <a href="/media/{{ track.download_link }}">-->
                             FREE DOWNLOAD
                         </a>
                     </div>
