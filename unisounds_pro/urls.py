@@ -25,10 +25,12 @@ import mainapp.views as mainapp
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp.main, name='main'),
+    path('<int:pk>', mainapp.download_count, name='download'),
     path('category/<int:pk>/', mainapp.blog, name='category'),
     url(r'^\.well-known/', include('letsencrypt.urls'))
+
 ]
 
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

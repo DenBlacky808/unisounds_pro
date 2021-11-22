@@ -26,8 +26,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # DEBUG = int(os.environ.get("DEBUG", default=0))
 DEBUG = False
 
+# ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 ALLOWED_HOSTS = ['5.63.154.57', 'unisounds.pro']
 # ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['0.0.0.0']
 
 # Application definition
 
