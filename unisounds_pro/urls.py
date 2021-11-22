@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import RedirectView
 
 import mainapp.views as mainapp
@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp.main, name='main'),
     path('category/<int:pk>/', mainapp.blog, name='category'),
+    url(r'^\.well-known/', include('letsencrypt.urls'))
 ]
 
 
