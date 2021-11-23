@@ -74,27 +74,8 @@
                 </a>
             {% endfor %}
         </nav>
-    </div>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            {% if tracks.has_previous %}
-                <li class="page-item"><a class="page-link"
-                                         href="{% url 'page' category.pk tracks.previous_page_number %}">Previous</a>
-                </li>
-            {% endif %}
-            <li class="page-item"><a class="page-link" href="#">
-                <span class="current">
-                    page {{ tracks.number }} in
-                    {{ tracks.paginator.num_pages }}
-                </span></a>
-            </li>
-            {% if tracks.has_next %}
-            <li class="page-item"><a class="page-link"
-                                     href="{% url 'page' category.pk tracks.next_page_number %}">Next</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+    </div>
 
     <div class="row mb-2">
         {% for track in tracks %}

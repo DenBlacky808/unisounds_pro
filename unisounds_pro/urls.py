@@ -24,9 +24,10 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mainapp.main, name='main'),
     path('<int:pk>', mainapp.download_count, name='download'),
     path('category/<int:pk>/', mainapp.blog, name='category'),
+    path('category/<int:pk>/page/<int:page>/', mainapp.blog, name='page'),
+    path('', mainapp.main, name='main'),
     url(r'^\.well-known/', include('letsencrypt.urls'))
 
 ]

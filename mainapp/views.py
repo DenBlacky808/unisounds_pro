@@ -1,27 +1,42 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.conf import settings
 from mainapp.models import Track, TrackCategory
 from django.templatetags.static import static
 import os
 from django.urls import include, path
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-def blog(request, pk):
+def blog(request, pk=0, page=1):
     links_menu = TrackCategory.objects.all()
 
+
     if pk == 0:
+        title = 'All'
         category = {
             'pk': 0,
-            'name': 'all'
+            'name': 'all',
+            'title': title,
         }
         tracks = Track.objects.all()
     else:
         category = get_object_or_404(TrackCategory, pk=pk)
         tracks = Track.objects.filter(category__name=category)
+        title = category
+
+    paginator = Paginator(tracks, 8)
+    try:
+        tracks_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        tracks_paginator = paginator.page(1)
+    except EmptyPage:
+        tracks_paginator = paginator.page(paginator.num_pages)
+
     content = {
+        'title': title,
         'category': category,
-        'tracks': tracks,
+        'tracks': tracks_paginator,
         'links_menu': links_menu,
     }
 
@@ -29,13 +44,16 @@ def blog(request, pk):
 
 
 def main(request):
+    title = 'Unisoundspro'
     links_menu = TrackCategory.objects.all()
-    tracks = Track.objects.all()
+    tracks = Track.objects.all()[:8]
+
     content = {
+        'title': title,
         'tracks': tracks,
         'links_menu': links_menu,
     }
-    return render(request, 'mainapp/blog.html', content)
+    return render(request, 'mainapp/main.html', content)
 
 
 def download_count(request, pk):
@@ -50,3 +68,4 @@ def download_count(request, pk):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+

@@ -1,8 +1,23 @@
 # pull official base image
 FROM python:3.9.6-alpine
 
-# set work directory
+
+
+# create directory for the app user
+RUN mkdir -p /code/app
+
+# create the app user
+RUN addgroup -S app && adduser -S app -G app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/media
 WORKDIR /code
+
+
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
