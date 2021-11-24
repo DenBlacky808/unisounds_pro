@@ -28,8 +28,8 @@ urlpatterns = [
     path('category/<int:pk>/', mainapp.blog, name='category'),
     path('category/<int:pk>/page/<int:page>/', mainapp.blog, name='page'),
     path('', mainapp.main, name='main'),
-    url(r'^\.well-known/', include('letsencrypt.urls'))
-
+    url(r'^\.well-known/', include('letsencrypt.urls')),
+    url(r'^', include('statapp.urls')),
 ]
 
 

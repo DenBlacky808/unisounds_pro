@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['5.63.154.57', 'unisounds.pro']
 # Application definition
 
 INSTALLED_APPS = [
+    'statapp.custom_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'letsencrypt',
+    'statapp',
 ]
 
 MIDDLEWARE = [
